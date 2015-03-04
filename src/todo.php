@@ -3,8 +3,8 @@
 
         private $description;
 
-        function __construct($descrip){
-            $this->description = $descrip;
+        function __construct($description){
+            $this->description = $description;
         }
 
         function setDescription($new_description)

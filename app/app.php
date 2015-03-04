@@ -24,14 +24,14 @@
         // $all_tasks = Task::getAll(); ANOTHER WAY OF SENDING THAT getAll() BIZNESS DOWN THERE IN THE IF()
 
         if (!empty(Task::getAll())) {
-            $output = $output . "
+            $output .= "
                 <h1>To Do List</h1>
                 <ul>";
             foreach (Task::getAll() as $task) {
-                $output = $output . "<p>" . $task->getDescription() . "</p>";
+                $output .= "<p>" . $task->getDescription() . "</p>";
             }
 
-            $output = $output . "</ul>";
+            $output .= "</ul>";
         }
 
 
@@ -39,7 +39,7 @@
         //     $output = $output . "<p>" . $task->getDescription() . "</p>";
         // }
 
-        $output = $output."</ul>
+        $output .= "</ul>
             <form action='/tasks' method='post'>
                 <label for='description'>To Do:</label>
                 <input id='description' name='description' type='text'>
@@ -47,6 +47,11 @@
                 <button type='submit'>Submit</button>
             </form>
         ";
+        $output .="
+            <form action='/delete_tasks' method='post'>
+            <button type='submit'>Clear</button>
+            </form>
+            ";
 
         return $output;
 
@@ -59,6 +64,15 @@
             <h1>You created a task!</h1>
             <p>" . $task->getDescription() . "</p>
             <p><a href='/'>View your list of things to do.</a></p>
+        ";
+    });
+
+    $app->post("/delete_tasks", function(){
+        Task::deleteAll();
+
+        return "
+        <h1>List Cleared</h1>
+        <p><a href='/'>Home</a></p>
         ";
     });
 

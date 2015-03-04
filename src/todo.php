@@ -1,5 +1,5 @@
 <?php
-    class ToDo{
+    class Task{
 
         private $description;
 
